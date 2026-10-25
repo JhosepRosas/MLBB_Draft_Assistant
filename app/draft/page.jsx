@@ -6,7 +6,6 @@ import SuggestionPanel from "@/components/SuggestionPanel";
 import HeroSearchModal from "@/components/HeroSearchModal";
 
 export default function DraftPage() {
-    const [lane, setLane] = useState("");
     const [heroes, setHeroes] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -95,23 +94,6 @@ export default function DraftPage() {
                 </div>
             )}
 
-            {/* Lane Selection */}
-            <section className={style.laneSection}>
-                <h3>Select Your Lane:</h3>
-                <select
-                    value={lane}
-                    onChange={(e) => { setLane(e.target.value); console.log(lane) }}
-                    className={style.laneSelect}
-                >
-                    <option value="">---  ---</option>
-                    <option value="Gold Lane">Gold Lane</option>
-                    <option value="Exp Lane">Exp Lane</option>
-                    <option value="Mid Lane">Mid Lane</option>
-                    <option value="Jungle">Jungle</option>
-                    <option value="Roam">Roam</option>
-                </select>
-            </section>
-
             {/* Draft Panels */}
             <section>
                 {/* <DraftPanel
@@ -145,7 +127,6 @@ export default function DraftPage() {
                     bans={banSlots}
                     allies={allySlots}
                     enemies={enemySlots}
-                    pickedLane={lane}
                 />
             </section>
 

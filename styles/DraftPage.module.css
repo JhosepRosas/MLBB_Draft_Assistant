@@ -1,23 +1,3 @@
-/* Lane Selection */
-
-.laneSection {
-    display: flex;
-    flex-wrap: wrap;
-}
-.laneSection h3 {
-    margin: 8px;
-}
-
-.laneSelect {
-    width: 150px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-primary);
-    font-family: var(--font-primary);
-    color: var(--text-primary);
-}
-
 /* Draft Panels */
 
 .draftPanel {
@@ -78,24 +58,24 @@
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .modal {
-    top: 70px;
-    margin: auto;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     border: 1px solid var(--border-color);
     padding: 1rem;
     border-radius: 8px;
-    width: 70%;
-    max-width: 290px;
+    width: min(100%, 1100px);
+    max-height: min(90vh, 900px);
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     gap: 1rem;
-    text-align: center;
     position: relative;
 }
 
@@ -108,7 +88,7 @@
     border: none;
     border-radius: 8px;
     padding: 0.75rem 1rem;
-    width: 90%;
+    width: 100%;
 }
 
 .closeBtn {
@@ -127,23 +107,87 @@
 .heroSelectionSection {
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
     gap: 0.5rem;
     width: 100%;
-    max-height: 300px;
+    min-height: 0;
     overflow-y: auto;
     padding: 0.5rem 0;
+    overscroll-behavior: contain;
 
     scrollbar-color: var(--border-color) transparent;
 }
 
+.heroLaneTabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 125px), 1fr));
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.25rem 0;
+}
+
+.heroLaneTab {
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.activeHeroLaneTab {
+    border-color: var(--accent-blue);
+    background: var(--accent-blue);
+}
+
+.heroLaneGroups {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.heroLaneGroup {
+    width: 100%;
+    padding: 0.65rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.heroLaneTitle {
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1rem;
+    text-align: left;
+}
+
+.heroGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 104px), 1fr));
+    align-content: start;
+    gap: clamp(0.25rem, 1.5vw, 0.75rem);
+    width: 100%;
+}
+
 .heroItem {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.75rem;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 88px;
+    padding: 0.5rem 0.25rem;
     border-radius: 6px;
     cursor: pointer;
-    width: 100%;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
 }
 
 .heroItem:hover {
@@ -151,51 +195,99 @@
 }
 
 .heroIcon {
-    width: 32px;
-    height: 32px;
+    width: clamp(40px, 6vw, 52px);
+    height: clamp(40px, 6vw, 52px);
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .heroName {
-    font-size: 1rem;
-    text-align: left;
+    font-size: 0.85rem;
+    text-align: center;
 }
 
-/* Suggestion Panel */
+.heroFilterMessage {
+    margin: 0.5rem;
+    opacity: 0.8;
+}
 
-.suggestionPanel {
+/* Suggestions by lane */
+
+.suggestionColumns {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: 100%;
+    align-items: start;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.suggestionColumn {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    min-width: 0;
+    margin: 0;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.suggestionColumn h3 {
+    min-height: 2.5rem;
+    margin: 0 0 0.5rem;
+    text-align: center;
+    align-self: stretch;
+}
+
+.noSuggestions {
+    font-size: 0.85rem;
+    text-align: center;
 }
 
 .suggestedHero {
-    width: 300px;
-    padding: 4px;
+    width: 100%;
+    padding: 0.4rem;
     display: flex;
-    gap: 20px;
+    gap: 0.5rem;
     align-items: center;
     border: 2px solid var(--border-color);
-    margin: 2px;
+    margin: 0.35rem 0;
     border-radius: 8px;
     position: relative;
 }
 
 .suggestedHero img {
-    width: 40px;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 auto;
+    border-radius: 50%;
 }
 
 .suggestedHero li {
+    font-size: 0.7rem;
+}
+
+.heroDescription {
+    min-width: 0;
+    overflow-wrap: anywhere;
     font-size: 0.8rem;
+}
+
+.heroDescription p {
+    margin: 0;
 }
 
 .heroScore {
     position: absolute;
-    right: 20px;
-    margin: auto;
-    letter-spacing: 2px;
+    top: 0.2rem;
+    right: 0.3rem;
+    margin: 0;
+    padding: 0 0.15rem;
+    background: var(--bg-primary);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
 }
 
 .greenColor {
@@ -204,6 +296,56 @@
 
 .redColor {
     color: rgb(184, 19, 19);
+}
+
+@media (max-width: 900px) {
+    .suggestionColumns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .suggestionColumns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .modal {
+        padding: 0.75rem;
+        max-height: 94vh;
+    }
+
+    .heroLaneTab {
+        padding: 0.45rem 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .overlay {
+        padding: 0.5rem;
+    }
+
+    .suggestionColumns {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .suggestionColumn h3 {
+        min-height: 0;
+    }
+
+    .heroGrid {
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 82px), 1fr));
+        gap: 0.25rem;
+    }
+
+    .heroItem {
+        min-height: 78px;
+    }
+
+    .heroName {
+        font-size: 0.75rem;
+    }
 }
 
 /* Error message */
